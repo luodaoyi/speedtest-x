@@ -32,4 +32,4 @@ fi
 echo "Done, Starting APACHE"
 
 # This runs apache
-apache2-foreground
+httpd -D FOREGROUND
