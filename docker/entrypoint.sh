@@ -29,6 +29,14 @@ if [ "$SAME_IP_MULTI_LOGS" != "false" ]; then
   sed -i "s/^const SAME_IP_MULTI_LOGS = false/const SAME_IP_MULTI_LOGS = $SAME_IP_MULTI_LOGS/g" $WWWROOT/backend/config.php
 fi
 
+sed -i '/LoadModule rewrite_module/s/^#//g' /etc/apache2/httpd.conf
+
+
+SERVER_ADMIN="${SERVER_ADMIN:-you@example.com}" 
+LOG_LEVEL="${LOG_LEVEL:-info}"
+TZ="${TZ:-UTC}"
+PHP_MEMORY_LIMIT="${PHP_MEMORY_LIMIT:-256M}"
+
 echo "Done, Starting APACHE"
 
 # This runs apache

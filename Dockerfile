@@ -7,7 +7,7 @@ ENV APACHE_DOCUMENT_ROOT /var/www/html/
 RUN apk add gnu-libiconv=1.15-r3 --update --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/v3.13/community
 ENV LD_PRELOAD /usr/lib/preloadable_libiconv.so php
 
-RUN  apk add --no-cache \
+RUN apk add --no-cache \
         apache2 \
         php-apache2 \
         freetype \
@@ -21,6 +21,14 @@ RUN  apk add --no-cache \
     && docker-php-ext-install -j$(nproc) gd \
     && apk del --no-cache freetype-dev libpng-dev libjpeg-turbo-dev \
     && rm -rf /var/cache/apk/*
+
+# ref  https://stackoverflow.com/questions/55263931/how-to-deploy-a-laravel-web-application-on-alpine-linux-using-docker
+
+RUN chown -R www-data:www-data /var/www/html/  \
+    && sed -i '/LoadModule rewrite_module/s/^#//g' /etc/apache2/httpd.conf \
+    && sed -i '/LoadModule session_module/s/^#//g' /etc/apache2/httpd.conf \
+    && sed -ri -e 's!/var/www/localhost/htdocs!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/httpd.conf \
+    && sed -i 's/AllowOverride\ None/AllowOverride\ All/g' /etc/apache2/httpd.conf 
 
 COPY backend/ backend
 COPY chartjs/ chartjs
