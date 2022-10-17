@@ -4,8 +4,11 @@ WORKDIR /var/www/html/
 
 ENV APACHE_DOCUMENT_ROOT /var/www/html/ 
 
+RUN apk add --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/v3.13/community/ --allow-untrusted gnu-libiconv
+ENV LD_PRELOAD /usr/lib/preloadable_libiconv.so php
 
-RUN  apk add --no-cache apache2 php-apache2 php7-mbstring php7-iconv freetype freetype-dev libpng libpng-dev libjpeg-turbo libjpeg-turbo-dev 
+
+RUN  apk add --no-cache apache2 php-apache2 freetype freetype-dev libpng libpng-dev libjpeg-turbo libjpeg-turbo-dev 
 RUN  docker-php-ext-install iconv 
 RUN  docker-php-ext-configure gd --with-freetype --with-jpeg 
 RUN  docker-php-ext-install gd 
