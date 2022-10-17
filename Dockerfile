@@ -8,11 +8,19 @@ RUN apk add gnu-libiconv=1.15-r3 --update --no-cache --repository http://dl-cdn.
 ENV LD_PRELOAD /usr/lib/preloadable_libiconv.so php
 
 
-RUN  apk add --no-cache apache2 php-apache2 freetype freetype-dev libpng libpng-dev libjpeg-turbo libjpeg-turbo-dev 
-RUN  docker-php-ext-install -j$(nproc) iconv 
-RUN  docker-php-ext-configure gd --with-freetype --with-jpeg 
-RUN  docker-php-ext-install -j$(nproc) gd 
-RUN  apk del --no-cache freetype-dev libpng-dev libjpeg-turbo-dev
+RUN  apk add --no-cache \
+        apache2 \
+        php-apache2 \
+        freetype \
+        freetype-dev \
+        libpng \
+        libpng-dev \
+        libjpeg-turbo \
+        libjpeg-turbo-dev \
+    && docker-php-ext-install -j$(nproc) iconv \
+    && docker-php-ext-configure gd --with-freetype --with-jpeg  \
+    && docker-php-ext-install -j$(nproc) gd \
+    && apk del --no-cache freetype-dev libpng-dev libjpeg-turbo-dev
 
 COPY backend/ backend
 COPY chartjs/ chartjs
