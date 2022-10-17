@@ -3,14 +3,10 @@ FROM php:7.4-alpine
 WORKDIR /var/www/html/
 
 ENV APACHE_DOCUMENT_ROOT /var/www/html/
-
-RUN apk add --no-cache apache2 php-apache2 
-RUN apk add --no-cache freetype libpng libjpeg-turbo freetype-dev libpng-dev libjpeg-turbo-dev && \
-  docker-php-ext-install -j$(nproc) iconv \
-  docker-php-ext-configure gd \
-    --with-freetype \
-    --with-jpeg \
-  NPROC=$(grep -c ^processor /proc/cpuinfo 2>/dev/null || 1) && \
+ 
+RUN apk add --no-cache apache2 php-apache2 freetype libpng libjpeg-turbo freetype-dev libpng-dev libjpeg-turbo-dev && \
+  docker-php-ext-install -j$(nproc) iconv && \
+  docker-php-ext-configure gd --with-freetype --with-jpeg && \
   docker-php-ext-install -j$(nproc) gd && \
   apk del --no-cache freetype-dev libpng-dev libjpeg-turbo-dev
 
