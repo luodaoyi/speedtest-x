@@ -1,10 +1,10 @@
-FROM php:7.4-alpine
+FROM php:7.4-alpine3.13
 
 WORKDIR /var/www/html/
 
 ENV APACHE_DOCUMENT_ROOT /var/www/html/ 
 
-RUN apk add -no-cache gnu-libiconv=1.15-r3 
+RUN apk add gnu-libiconv=1.15-r3 --update --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/v3.13/community
 ENV LD_PRELOAD /usr/lib/preloadable_libiconv.so php
 
 
