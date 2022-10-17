@@ -26,7 +26,7 @@ COPY backend/ backend
 COPY chartjs/ chartjs
 COPY *.js .
 COPY *.html .
-COPY docker/entrypoint.sh /
+COPY docker/entrypoint.sh /entrypoint.sh
 
 ENV TIME_ZONE=Asia/Shanghai
 RUN ln -snf /usr/share/zoneinfo/$TIME_ZONE /etc/localtime && echo $TIME_ZONE > /etc/timezone
