@@ -4,7 +4,7 @@ WORKDIR /var/www/html/
 
 ENV APACHE_DOCUMENT_ROOT /var/www/html/ 
 
-RUN apk add --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/v3.13/community/ --allow-untrusted gnu-libiconv
+RUN apk add --no-cache  gnu-libiconv
 ENV LD_PRELOAD /usr/lib/preloadable_libiconv.so php
 
 
