@@ -7,7 +7,6 @@ ENV APACHE_DOCUMENT_ROOT /var/www/html/
 RUN apk add gnu-libiconv=1.15-r3 --update --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/v3.13/community
 ENV LD_PRELOAD /usr/lib/preloadable_libiconv.so php
 
-
 RUN  apk add --no-cache \
         apache2 \
         php-apache2 \
@@ -20,7 +19,8 @@ RUN  apk add --no-cache \
     && docker-php-ext-install -j$(nproc) iconv \
     && docker-php-ext-configure gd --with-freetype --with-jpeg  \
     && docker-php-ext-install -j$(nproc) gd \
-    && apk del --no-cache freetype-dev libpng-dev libjpeg-turbo-dev
+    && apk del --no-cache freetype-dev libpng-dev libjpeg-turbo-dev \
+    && rm -rf /var/cache/apk/*
 
 COPY backend/ backend
 COPY chartjs/ chartjs
@@ -44,4 +44,4 @@ VOLUME ["/speedlogs"]
 # Final touches
 
 EXPOSE 80
-CMD ["sh", "/entrypoint.sh"]
+CMD ["/entrypoint.sh"]
