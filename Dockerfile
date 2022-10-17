@@ -4,7 +4,7 @@ WORKDIR /var/www/html/
 
 ENV APACHE_DOCUMENT_ROOT /var/www/html/ 
 
-RUN apk add --no-cache  gnu-libiconv
+RUN apk add --update -no-cache gnu-libiconv=1.15-r3 
 ENV LD_PRELOAD /usr/lib/preloadable_libiconv.so php
 
 
