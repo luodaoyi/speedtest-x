@@ -1,5 +1,5 @@
 # speedtest-x
-![Docker Cloud Build Status](https://img.shields.io/docker/cloud/build/badapple9/speedtest-x) ![GitHub last commit](https://img.shields.io/github/last-commit/badapple9/speedtest-x) ![GitHub](https://img.shields.io/github/license/badapple9/speedtest-x)
+![GitHub Actions Build Status](https://img.shields.io/github/workflow/status/badapple9/speedtest-x/Build%20Docker%20Image) ![GitHub last commit](https://img.shields.io/github/last-commit/badapple9/speedtest-x) ![GitHub](https://img.shields.io/github/license/badapple9/speedtest-x)
 
 本仓库为 [LibreSpeed](https://github.com/librespeed/speedtest) 的延伸项目，LibreSpeed 是一个非常轻巧的网站测速工具。
 
@@ -30,16 +30,13 @@ speedtest-x 使用文件数据库来保存来自不同用户的测速结果，�
 >
 > `SAME_IP_MULTI_LOGS = false`：是否允许同一IP记录多条测速结果
 
-#### Docker 部署
+#### Docker 部署 (支持平台： amd64 / arm64)
 
 1、拉取 [Docker 镜像](https://hub.docker.com/r/badapple9/speedtest-x) `docker pull badapple9/speedtest-x`
 
-  (**ARM 架构的机器，执行 `docker pull stilleshan/speedtest-x`**，ARM 镜像由热心网友制作)
-
 2、运行容器 `docker run -d -p 9001:80 -it badapple9/speedtest-x`   
 
-  (**ARM 架构的机器，运行 `docker run -d -p 9001:80 -it stilleshan/speedtest-x`**)
-
+参数解释：
 > **-d**：以常驻进程模式启动
 >
 > **9001**: 默认容器开放端口，可改为其他端口
@@ -72,6 +69,10 @@ speedtest-x 使用文件数据库来保存来自不同用户的测速结果，�
 ![results](https://raw.githubusercontent.com/BadApple9/images/main/resultsdemo.png)
 
 ## 更新记录
+
+**2022/07/25**
+
+> 静态资源 CDN 更换为 `cdn.baomitu.com`
 
 **2020/12/22**
 
