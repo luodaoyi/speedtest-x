@@ -42,6 +42,5 @@ ENV SAME_IP_MULTI_LOGS="false"
 VOLUME ["/speedlogs"]
 
 # Final touches
-
 EXPOSE 80
-CMD ["/entrypoint.sh"]
+ENTRYPOINT ["sh", "/entrypoint.sh"]
