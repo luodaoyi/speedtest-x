@@ -4,11 +4,11 @@ WORKDIR /var/www/html/
 
 ENV APACHE_DOCUMENT_ROOT /var/www/html/
  
-RUN apk add --no-cache apache2 php-apache2 freetype libpng libjpeg-turbo freetype-dev libpng-dev libjpeg-turbo-dev && \
-  docker-php-ext-install iconv && \
-  docker-php-ext-configure gd --with-freetype --with-jpeg && \
-  docker-php-ext-install gd && \
-  apk del --no-cache freetype-dev libpng-dev libjpeg-turbo-dev
+RUN  apk add --no-cache apache2 php-apache2 freetype libpng libjpeg-turbo freetype-dev libpng-dev libjpeg-turbo-dev 
+RUN  docker-php-ext-install iconv 
+RUN  docker-php-ext-configure gd --with-freetype --with-jpeg 
+RUN  docker-php-ext-install gd 
+RUN  apk del --no-cache freetype-dev libpng-dev libjpeg-turbo-dev
 
 COPY backend/ backend
 COPY chartjs/ chartjs
