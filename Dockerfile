@@ -44,4 +44,4 @@ VOLUME ["/speedlogs"]
 # Final touches
 
 EXPOSE 80
-CMD ["bash", "/entrypoint.sh"]
+CMD ["sh", "/entrypoint.sh"]
