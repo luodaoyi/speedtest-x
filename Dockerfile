@@ -5,24 +5,15 @@ WORKDIR /var/www/html/
 ENV APACHE_DOCUMENT_ROOT /var/www/html/
  
 RUN apk add --no-cache apache2 php-apache2 freetype libpng libjpeg-turbo freetype-dev libpng-dev libjpeg-turbo-dev && \
-  docker-php-ext-install -j$(nproc) iconv && \
+  docker-php-ext-install iconv && \
   docker-php-ext-configure gd --with-freetype --with-jpeg && \
-  docker-php-ext-install -j$(nproc) gd && \
+  docker-php-ext-install gd && \
   apk del --no-cache freetype-dev libpng-dev libjpeg-turbo-dev
 
- 
-# Prepare files and folders
-
-RUN mkdir -p /var/www/html/
-
-# Copy sources
-
-COPY backend/ ./backend
-COPY chartjs/ ./chartjs
-
+COPY backend/ backend
+COPY chartjs/ chartjs
 COPY *.js .
 COPY *.html .
-
 COPY docker/entrypoint.sh /
 
 ENV TIME_ZONE=Asia/Shanghai
