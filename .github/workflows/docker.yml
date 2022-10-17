@@ -56,7 +56,8 @@ jobs:
         with:
           context: .
           file: ./Dockerfile
-          platforms: linux/amd64,linux/arm64,linux/arm,linux/s390x
+          # ,linux/arm
+          platforms: linux/amd64,linux/arm64,linux/s390x
           push: true
           tags: |
             ${{ steps.image-name.outputs.GHRC_IMAGE_NAME }}:${{ steps.extract_branch.outputs.tag }}
